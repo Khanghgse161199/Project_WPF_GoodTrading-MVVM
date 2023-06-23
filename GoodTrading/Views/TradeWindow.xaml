@@ -1,0 +1,74 @@
+﻿<Window x:Class="GoodTrading.Views.TradeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GoodTrading.Views"
+        mc:Ignorable="d"
+        Title="TradeWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.3*"></RowDefinition>
+            <RowDefinition Height="0.6*"></RowDefinition>
+            <RowDefinition Height="0.1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.2*"></RowDefinition>
+                <RowDefinition Height="0.8*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0">Your Chosen Product</Label>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.5*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Product Name</TextBlock>
+                <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">Product Price</TextBlock>
+                <TextBlock Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">Product Description</TextBlock>
+                <TextBlock Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center">User</TextBlock>
+                <TextBlock Grid.Row="1" HorizontalAlignment="Center" Grid.Column="0" Text="{Binding UserGoodChoice.Name}"></TextBlock>
+                <TextBlock Grid.Row="1" HorizontalAlignment="Center" Grid.Column="1" Text="{Binding UserGoodChoice.Price }"></TextBlock>
+                <TextBlock Grid.Row="1" HorizontalAlignment="Center" Grid.Column="2" Text="{Binding UserGoodChoice.Description}"></TextBlock>
+
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"></RowDefinition>
+                <RowDefinition Height="0.8*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0">Can trade products (of you)</Label>
+            <Grid Grid.Row="1">
+                <ScrollViewer Grid.Row="1">
+                    <ListView  SelectedItem="{Binding ToGood}"  ItemsSource="{Binding UserGoods}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="140" Header="Product"
+         DisplayMemberBinding="{Binding Name}"  />
+                                <GridViewColumn Width="140" Header="Price"
+         DisplayMemberBinding="{Binding Price}" />
+                                <GridViewColumn Width="140" Header="Description"
+         DisplayMemberBinding="{Binding Description}" />
+                                <GridViewColumn Width="140" Header="Username"
+         DisplayMemberBinding="{Binding User.UserName}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Command="{Binding ConfrimBtnClicked}" Width="100" Margin="5 5 5 5">Confirm</Button>
+                <Button Command="{Binding cancelBtnClicked}" Width="100" Margin="5 5 5 5">Cancel</Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

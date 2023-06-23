@@ -1,0 +1,79 @@
+﻿<Window x:Class="GoodTrading.Views.WorkSpaceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GoodTrading.Views"
+        mc:Ignorable="d"
+        Title="WorkSpaceWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="0.2*"></RowDefinition>
+            <RowDefinition Height="0.7*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <StackPanel Orientation="Horizontal">
+                    <Button Command="{Binding UpLoadButtonClicked, UpdateSourceTrigger=PropertyChanged}">UpLoad</Button>
+                    <Button Command="{Binding UserGoodsList, UpdateSourceTrigger=PropertyChanged}">YourGoods</Button>
+                    <Button Command="{Binding UserHistoryTrade, UpdateSourceTrigger=PropertyChanged}">HistoryTrade</Button>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Column="1">
+                <StackPanel>
+                    <TextBlock HorizontalAlignment="Center">Trading Goods</TextBlock>
+                    <TextBlock Margin="0 10 0 0" Text="{Binding Message}"></TextBlock>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Column="2">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBlock HorizontalAlignment="Right" Text="{Binding Username,UpdateSourceTrigger=PropertyChanged}" Margin="0 0 10 0"></TextBlock>
+                    <Button HorizontalAlignment="Right" Command="{Binding LogoutButtonClicked}">Logout</Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid VerticalAlignment="Center" Height="50">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBox Text="{Binding SearchValue, UpdateSourceTrigger=PropertyChanged}" Height="40" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBox>
+                    <Button Height="40" Width="100" Command="{Binding SearchButtonClicked}">Search</Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"></RowDefinition>
+                <RowDefinition Height="0.8*"></RowDefinition>
+                <RowDefinition Height="0.1*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid HorizontalAlignment="Right">
+                <Button Command="{Binding refreshBtnClick}" Content="↻ Refresh" Margin="5 5 5 5"></Button>
+            </Grid>
+            <ScrollViewer Grid.Row="1">
+                <ListView SelectedItem="{Binding GoodChoice}" ItemsSource="{Binding AllGoods}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="140" Header="Product"
+         DisplayMemberBinding="{Binding Name}"  />
+                            <GridViewColumn Width="140" Header="Price"
+         DisplayMemberBinding="{Binding Price}" />
+                            <GridViewColumn Width="140" Header="Description"
+         DisplayMemberBinding="{Binding Description}" />
+                            <GridViewColumn Width="140" Header="Username"
+         DisplayMemberBinding="{Binding User.UserName}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
+            <Grid Grid.Row="3" HorizontalAlignment="Center">
+                <Button Command="{Binding TradeButtonCliked}">Trade</Button>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
